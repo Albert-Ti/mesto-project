@@ -1,0 +1,20 @@
+.profile__edit-name-button {
+	background-color: #000;
+	border: 1px solid #fff;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	text-align: center;
+	box-sizing: border-box;
+}
+
+@media (max-width: 620px) {
+	.profile__edit-name-button {
+		width: 18px;
+		height: 18px;
+	}
+}
+
+.profile__edit-name-button:hover {
+	opacity: 0.7;
+}

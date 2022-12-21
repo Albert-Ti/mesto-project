@@ -1,0 +1,10 @@
+.profile__wrap-button {
+	flex: 1;
+	text-align: right;
+}
+
+@media (max-width: 620px) {
+	.profile__wrap-button {
+		margin: 36px auto 0;
+	}
+}

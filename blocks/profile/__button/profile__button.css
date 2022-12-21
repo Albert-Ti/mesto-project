@@ -1,0 +1,21 @@
+.profile__button {
+	display: inline-block;
+	width: 150px;
+	height: 50px;
+	background-color: #000;
+	border: 2px solid #fff;
+	box-sizing: border-box;
+	position: relative;
+}
+
+@media (max-width: 620px) {
+	.profile__button {
+		width: 88vw;
+		margin-left: calc(50% - 44vw);
+
+	}
+}
+
+.profile__button:hover {
+	opacity: 0.7;
+}

@@ -1,0 +1,13 @@
+.element__like {
+	width: 22px;
+	height: 19px;
+}
+
+.element__like:hover {
+	opacity: 0.7;
+}
+
+.element__like:active {
+	fill: #000;
+	opacity: 1;
+}

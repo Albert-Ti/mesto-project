@@ -1,0 +1,7 @@
+.element__image {
+	min-width: 100%;
+	min-height: 282px;
+	padding: 0;
+	object-fit: cover;
+	object-position: center;
+}
