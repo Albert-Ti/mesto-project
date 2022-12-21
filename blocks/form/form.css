@@ -2,10 +2,8 @@
 	min-width: 232px;
 	max-width: 430px;
 	margin: 0 19px;
-
 	display: flex;
 	flex-direction: column;
-
 	padding: 36px;
 	border-radius: 5%;
 	background-color: #fff;
