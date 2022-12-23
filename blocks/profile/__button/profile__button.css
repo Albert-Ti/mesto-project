@@ -7,14 +7,18 @@
 	background-color: #000;
 	border: 2px solid #fff;
 	box-sizing: border-box;
-}
+	border-radius: 2px;
+	padding: 0;
 
-@media (max-width: 620px) {
-	.profile__button {
-		width: 88vw;
-	}
 }
 
 .profile__button:hover {
-	opacity: 0.7;
+	opacity: 0.6;
+}
+
+@media (max-width: 700px) {
+	.profile__button {
+		margin: 36px auto 0;
+		width: 88vw;
+	}
 }

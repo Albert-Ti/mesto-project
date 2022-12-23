@@ -1,5 +1,6 @@
 .profile__info {
+	flex-grow: 1;
 	display: grid;
-	grid-template: auto auto / auto auto;
+	grid-template: max-content max-content / max-content max-content;
 	align-items: center;
 }

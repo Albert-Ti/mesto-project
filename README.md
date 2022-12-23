@@ -7,4 +7,4 @@
 * медиазапросы
 * относительные величины
 ##### Использованы технологии: HTML, CSS.
-###### Ссылка на сайт проекта: [https://albert-ti.github.io/mesto-project/]
+###### Ссылка на сайт проекта: [https://albert-ti.github.io/mesto-project/index.html]

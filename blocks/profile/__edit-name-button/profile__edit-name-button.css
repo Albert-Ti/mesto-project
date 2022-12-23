@@ -4,7 +4,6 @@
 	width: 24px;
 	height: 24px;
 	padding: 0;
-	text-align: center;
 	box-sizing: border-box;
 }
 
@@ -16,5 +15,5 @@
 }
 
 .profile__edit-name-button:hover {
-	opacity: 0.7;
+	opacity: 0.6;
 }

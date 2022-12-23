@@ -1,22 +1,28 @@
+.form__close {
+	padding: 0;
+	border: none;
+	background-color: #fff;
+}
+
 .form__close::before {
 	content: '';
-	width: 35px;
-	height: 3px;
+	width: 41px;
+	height: 4px;
 	background-color: #fff;
 	position: absolute;
 	left: 101%;
-	bottom: 104%;
+	bottom: 106%;
 	transform: rotate(45deg);
 }
 
 .form__close::after {
 	content: '';
-	width: 35px;
-	height: 3px;
+	width: 41px;
+	height: 4px;
 	background-color: #fff;
 	position: absolute;
 	left: 101%;
-	bottom: 104%;
+	bottom: 106%;
 	transform: rotate(-45deg);
 }
 
@@ -24,26 +30,26 @@
 	.form__close::before {
 		content: '';
 		width: 25px;
-		height: 2px;
+		height: 3px;
 		background-color: #fff;
 		position: absolute;
 		left: 92%;
-		bottom: 105%;
+		bottom: 107%;
 		transform: rotate(45deg);
 	}
 
 	.form__close::after {
 		content: '';
 		width: 25px;
-		height: 2px;
+		height: 3px;
 		background-color: #fff;
 		position: absolute;
 		left: 92%;
-		bottom: 105%;
+		bottom: 107%;
 		transform: rotate(-45deg);
 	}
 }
 
 .form__close:hover {
-	opacity: 0.7;
+	opacity: 0.6;
 }

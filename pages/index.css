@@ -1,5 +1,5 @@
-@import url(../vendor/fonts.css);
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts.css);
 @import url(../blocks/page/page.css);
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 @import url(../blocks/header/header.css);
@@ -22,13 +22,15 @@
 @import url(../blocks/element/__item/element__item.css);
 @import url(../blocks/element/__title/element__title.css);
 @import url(../blocks/element/__like/element__like.css);
+@import url(../blocks/element/__like-img/element__like-img.css);
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__close/form__close.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__place/form__place.css);
-@import url(../blocks/form/__place/_about-me/form__place_about-me.css);
 @import url(../blocks/form/__button/form__button.css);
 /* +++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 @import url(../blocks/footer/footer.css);

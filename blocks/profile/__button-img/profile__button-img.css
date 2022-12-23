@@ -1,4 +1,6 @@
-/* .profile__button-img {
-	width: 22px;
-	height: 22px;
-} */
+@media (max-width: 620px) {
+	.profile__button-img {
+		width: 16px;
+		height: 16px;
+	}
+}

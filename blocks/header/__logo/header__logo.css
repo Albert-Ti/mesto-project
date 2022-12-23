@@ -2,8 +2,15 @@
 	margin: 0 0 41px 0;
 }
 
-@media (max-width: 620px) {
+@media (max-width: 910px) {
 	.header__logo {
 		margin: 0 0 31px 27px;
+	}
+}
+
+@media (max-width: 400px) {
+	.header__logo {
+		width: 103.74px;
+		height: 24.4px;
 	}
 }
