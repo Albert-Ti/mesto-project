@@ -2,12 +2,3 @@
 	width: 22px;
 	height: 19px;
 }
-
-.element__like-img:hover {
-	opacity: 0.5;
-}
-
-.element__like-img:active {
-	fill: #000;
-	opacity: 1;
-}

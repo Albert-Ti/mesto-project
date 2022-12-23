@@ -2,3 +2,12 @@
 	border: none;
 	background-color: #fff;
 }
+
+.element__like:hover {
+	opacity: 0.5;
+}
+
+.element__like:active {
+	fill: #000;
+	opacity: 1;
+}

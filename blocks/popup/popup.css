@@ -9,8 +9,3 @@
 	align-items: center;
 	justify-content: center;
 }
-
-.popup:target {
-	opacity: 1;
-	visibility: visible;
-}
