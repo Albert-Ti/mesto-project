@@ -4,12 +4,12 @@
 	justify-content: center;
 	width: 150px;
 	height: 50px;
-	background-color: rgba(0, 0, 0, .9);
+	background-color: transparent;
 	border: 2px solid #fff;
 	box-sizing: border-box;
 	border-radius: 2px;
 	padding: 0;
-
+	cursor: pointer;
 }
 
 .profile__button:hover {
@@ -20,5 +20,12 @@
 	.profile__button {
 		margin: 36px auto 0;
 		width: 88vw;
+	}
+}
+
+@media (max-width: 320px) {
+	.profile__button {
+		align-self: flex-start;
+		margin: 32px 0 0;
 	}
 }

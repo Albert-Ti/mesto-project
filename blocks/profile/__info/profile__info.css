@@ -4,3 +4,11 @@
 	grid-template: max-content max-content / max-content max-content;
 	align-items: center;
 }
+
+@media (max-width: 400px) {
+	.profile__info {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+}

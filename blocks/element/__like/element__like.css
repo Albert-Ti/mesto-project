@@ -1,6 +1,7 @@
 .element__like {
 	border: none;
 	background-color: #fff;
+	cursor: pointer;
 }
 
 .element__like:hover {

@@ -3,6 +3,7 @@
 	font-size: 42px;
 	line-height: 48px;
 	font-weight: 500;
+	max-width: 294px;
 	text-align: center;
 	white-space: nowrap;
 	text-overflow: ellipsis;
@@ -11,6 +12,7 @@
 
 @media (max-width: 620px) {
 	.profile__name {
+		max-width: 189px;
 		font-size: 27px;
 		margin-right: 10px;
 	}
