@@ -7,6 +7,6 @@
 	border-bottom: 1px solid rgba(0, 0, 0, .2);
 }
 
-.form__place:nth-child(4) {
+.form__place:last-of-type {
 	margin-bottom: 0;
 }
