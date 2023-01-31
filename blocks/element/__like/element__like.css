@@ -2,13 +2,11 @@
 	border: none;
 	background-color: #fff;
 	cursor: pointer;
+	transition: all 0.1s linear;
 }
 
 .element__like:hover {
-	opacity: 0.5;
-}
-
-.element__like:active {
-	fill: #000;
-	opacity: 1;
+	opacity: 0.6;
+	transition: all 0.1s linear;
+	transform: scale(1.14);
 }

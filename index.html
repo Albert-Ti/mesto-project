@@ -29,6 +29,9 @@
 		</section>
 		<section class="elements">
 			<figure class="element">
+				<button class="element__remove" type="button">
+					<img src="./image/Trash.svg" alt="">
+				</button>
 				<img class="element__image" src="./image/Karachay-Cherkessia.jpg" alt="Каменное строение">
 				<figcaption class="element__item">
 					<h2 class="element__title">Карачаево-Черкесия</h2>
@@ -38,6 +41,9 @@
 				</figcaption>
 			</figure>
 			<figure class="element">
+				<button class="element__remove" type="button">
+					<img src="./image/Trash.svg" alt="">
+				</button>
 				<img class="element__image" src="./image/Mountain-Elbrus.jpg" alt="Гора Эльбрус в закате">
 				<figcaption class="element__item">
 					<h2 class="element__title">Гора Эльбрус</h2>
@@ -47,36 +53,12 @@
 				</figcaption>
 			</figure>
 			<figure class="element">
+				<button class="element__remove" type="button">
+					<img src="./image/Trash.svg" alt="">
+				</button>
 				<img class="element__image" src="./image/Dombai.jpg" alt="Горы Домбая">
 				<figcaption class="element__item">
 					<h2 class="element__title">Домбай</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
-			<figure class="element">
-				<img class="element__image" src="./image/Dombai.jpg" alt="Горы Домбая">
-				<figcaption class="element__item">
-					<h2 class="element__title">Домбай</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
-			<figure class="element">
-				<img class="element__image" src="./image/Mountain-Elbrus.jpg" alt="Гора Эльбрус в закате">
-				<figcaption class="element__item">
-					<h2 class="element__title">Гора Эльбрус</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
-			<figure class="element">
-				<img class="element__image" src="./image/Karachay-Cherkessia.jpg" alt="Каменное строение">
-				<figcaption class="element__item">
-					<h2 class="element__title">Карачаево-Черкесия</h2>
 					<button type="button" class="element__like">
 						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
 					</button>
@@ -87,17 +69,30 @@
 	<footer class="footer">
 		<p class="footer__logo">© 2020 Mesto Russia</p>
 	</footer>
+	<template id="template-card">
+		<figure class="element">
+			<img class="element__remove" src="./image/Trash.svg" alt="">
+			<img class="element__image" src="" alt="Картинка">
+			<figcaption class="element__item">
+				<h2 class="element__title"></h2>
+				<button type="button" class="element__like">
+					<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
+				</button>
+			</figcaption>
+		</figure>
+	</template>
 	<div class="popup">
 		<div class="popup__container">
 			<form action="#" method="post" name="form" class="form">
 				<button type="button" class="form__close"></button>
 				<h3 class="form__title">Редактировать профиль</h3>
-				<input type="text" name="username" value="Жак-ив Кусто" class="form__place">
+				<input type="text" name="username" value="Жак-Ив Кусто" class="form__place">
 				<input type="text" name="about-me" value="Исследователь океана" class="form__place">
 				<button type="submit" class="form__button">Сохранить</button>
 			</form>
 		</div>
 	</div>
+	<script src="./js/script.js"></script>
 </body>
 
 </html>

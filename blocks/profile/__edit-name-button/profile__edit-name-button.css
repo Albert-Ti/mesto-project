@@ -4,7 +4,13 @@
 	width: 24px;
 	height: 24px;
 	padding: 0;
+	transition: all 0.1s linear;
 	cursor: pointer;
+}
+
+.profile__edit-name-button:hover {
+	transition: all 0.1s linear;
+	opacity: 0.6;
 }
 
 @media (max-width: 620px) {
@@ -12,8 +18,4 @@
 		width: 18px;
 		height: 18px;
 	}
-}
-
-.profile__edit-name-button:hover {
-	opacity: 0.6;
 }
