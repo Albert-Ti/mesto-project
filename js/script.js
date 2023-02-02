@@ -8,7 +8,7 @@ function showPopup(popupItem) {
 		popupItem.classList.add('popup_opened');
 	}
 }
-document.querySelector('.profile__edit-name-button').addEventListener('click', () => showPopup(popupProfile));
+document.querySelector('.profile__edit-name-button').addEventListener('click', () => { showPopup(popupProfile) });
 popupProfile.querySelector('.popup__close').addEventListener('click', () => showPopup(popupProfile));
 
 // ---Функция отправки формы профиля:---
@@ -22,6 +22,8 @@ function formSubmitHandler(evt) {
 	profileName.textContent = `${nameInput.value}`;
 	profileText.textContent = `${jobInput.value}`;
 	showPopup(popupProfile);
+	nameInput.value = '';
+	jobInput.value = '';
 }
 popupProfile.querySelector('.form').addEventListener('submit', formSubmitHandler);
 
@@ -35,6 +37,8 @@ function formSubmitCards(evt) {
 	const imageCard = popupCard.querySelector('[name="url"]');
 	addCard(titleCard.value, imageCard.value);
 	showPopup(popupCard);
+	titleCard.value = '';
+	imageCard.value = '';
 }
 popupCard.querySelector('.form').addEventListener('submit', formSubmitCards);
 
@@ -48,7 +52,7 @@ function addCard(titleValue, urlImg) {
 	const elementImage = cloneCard.querySelector('.element__image');
 	elementImage.setAttribute('src', urlImg);
 	cloneCard.querySelector('.element__title').textContent = titleValue;
-
+	// ---открытие картинки---
 	elementImage.addEventListener('click', () => {
 		modalText.textContent = titleValue;
 		urlChange.setAttribute('src', urlImg);
