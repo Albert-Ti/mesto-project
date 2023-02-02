@@ -28,42 +28,6 @@
 			</button>
 		</section>
 		<section class="elements">
-			<figure class="element">
-				<button class="element__remove" type="button">
-					<img src="./image/Trash.svg" alt="">
-				</button>
-				<img class="element__image" src="./image/Karachay-Cherkessia.jpg" alt="Каменное строение">
-				<figcaption class="element__item">
-					<h2 class="element__title">Карачаево-Черкесия</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
-			<figure class="element">
-				<button class="element__remove" type="button">
-					<img src="./image/Trash.svg" alt="">
-				</button>
-				<img class="element__image" src="./image/Mountain-Elbrus.jpg" alt="Гора Эльбрус в закате">
-				<figcaption class="element__item">
-					<h2 class="element__title">Гора Эльбрус</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
-			<figure class="element">
-				<button class="element__remove" type="button">
-					<img src="./image/Trash.svg" alt="">
-				</button>
-				<img class="element__image" src="./image/Dombai.jpg" alt="Горы Домбая">
-				<figcaption class="element__item">
-					<h2 class="element__title">Домбай</h2>
-					<button type="button" class="element__like">
-						<img class="element__like-img" src="./image/element-like.svg" alt="Сердце лайк">
-					</button>
-				</figcaption>
-			</figure>
 		</section>
 	</main>
 	<footer class="footer">
@@ -81,10 +45,10 @@
 			</figcaption>
 		</figure>
 	</template>
-	<div class="popup">
+	<div class="popup popup-profile">
 		<div class="popup__container">
 			<form action="#" method="post" name="form" class="form">
-				<button type="button" class="form__close"></button>
+				<button type="button" class="popup__close"></button>
 				<h3 class="form__title">Редактировать профиль</h3>
 				<input type="text" name="username" value="Жак-Ив Кусто" class="form__place">
 				<input type="text" name="about-me" value="Исследователь океана" class="form__place">
@@ -92,9 +56,20 @@
 			</form>
 		</div>
 	</div>
-	<div class="popup popup_img">
+	<div class="popup popup-card">
+		<div class="popup__container">
+			<form action="#" method="post" name="form" class="form">
+				<button type="button" class="popup__close"></button>
+				<h3 class="form__title">Новое место</h3>
+				<input type="text" name="cardname" placeholder="Название" class="form__place">
+				<input type="url" name="url" placeholder="Ссылка на картинку" class="form__place">
+				<button type="submit" class="form__button">Сохранить</button>
+			</form>
+		</div>
+	</div>
+	<div class="popup popup-img">
 		<figure class="modal">
-			<button type="button" class="modal__close"></button>
+			<button type="button" class="popup__close"></button>
 			<img class="modal__open-img" src="" alt="картинка">
 			<figcaption class="modal__text"></figcaption>
 		</figure>
