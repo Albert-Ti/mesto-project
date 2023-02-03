@@ -6,7 +6,7 @@ const profileJob = document.querySelector('.profile__text');
 const closeButtons = document.querySelectorAll('.popup__close');
 const inputProfileName = document.querySelector('[name="username"]');
 const inputProfileJob = document.querySelector('[name="about-me"]');
-const cardsElements = document.querySelector('.elements');
+const cardElements = document.querySelector('.elements');
 const cardImageUrl = document.querySelector('[name="url"]');
 const cardImageName = document.querySelector('[name="cardname"]');
 const pictureOpen = document.querySelector('.modal__open-img');
@@ -50,10 +50,10 @@ document.forms["card-form"].addEventListener('submit', handleCardsFormSubmit);
 // ---функция добавления карточки:---
 function addCard(titleValue, urlValue) {
 	const cardElement = createCard(titleValue, urlValue);
-	cardsElements.prepend(cardElement);
+	cardElements.prepend(cardElement);
 }
 
-// ---Клон карточки:---
+// ---Клонирование/Изменение карточки:---
 function createCard(title, url) {
 	const templateCard = document.querySelector('#template-card').content;
 	const cloneCard = templateCard.querySelector('.element').cloneNode(true);
@@ -72,7 +72,7 @@ function createCard(title, url) {
 	// ---Лайк добавленных карточек:---
 	likeButton.addEventListener('click', () => likeButton.classList.toggle('element__like_active'));
 	// ---Удаление добавленных карточек:---
-	cloneCard.querySelectorAll('.element__remove').forEach(function (item) {
+	cloneCard.querySelectorAll('.element__remove').forEach((item) => {
 		item.addEventListener('click', () => {
 			item.closest('.element').remove();
 		})
