@@ -72,11 +72,9 @@ function createCard(title, url) {
 	// ---Лайк добавленных карточек:---
 	likeButton.addEventListener('click', () => likeButton.classList.toggle('element__like_active'));
 	// ---Удаление добавленных карточек:---
-	cloneCard.querySelectorAll('.element__remove').forEach((item) => {
-		item.addEventListener('click', () => {
-			item.closest('.element').remove();
-		})
-	});
+	cloneCard.querySelector('.element__remove').addEventListener('click', () => {
+		cloneCard.closest('.element').remove();
+	})
 	return cloneCard;
 }
 
