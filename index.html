@@ -46,22 +46,31 @@
 	</template>
 	<div class="popup popup-profile">
 		<div class="popup__container">
-			<form action="#" method="post" name="profile-form" class="form">
+			<form action="#" method="post" name="profile-form" class="form" novalidate>
 				<button type="button" class="popup__close"></button>
 				<h3 class="form__title">Редактировать профиль</h3>
-				<input type="text" name="username" value="Жак-Ив Кусто" class="form__place">
-				<input type="text" name="about-me" value="Исследователь океана" class="form__place">
+				<input id="place-name" type="text" name="username" value="Жак-Ив Кусто" class="form__place" minlength="2"
+					maxlength="40" pattern="^[a-zA-Zа-яА-Я -]+$"
+					data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+				<span class="form__place-error place-name-error"></span>
+				<input id="place-about" type="text" name="about-me" value="Исследователь океана" class="form__place"
+					minlength="2" maxlength="200" required>
+				<span class="form__place-error place-about-error"></span>
 				<button type="submit" class="form__button">Сохранить</button>
 			</form>
 		</div>
 	</div>
 	<div class="popup popup-card">
 		<div class="popup__container">
-			<form action="#" method="post" name="card-form" class="form">
+			<form action="#" method="post" name="card-form" class="form" novalidate>
 				<button type="button" class="popup__close"></button>
 				<h3 class="form__title">Новое место</h3>
-				<input type="text" name="cardname" placeholder="Название" class="form__place">
-				<input type="url" name="url" placeholder="Ссылка на картинку" class="form__place">
+				<input id="place-cardname" type="text" name="cardname" placeholder="Название" class="form__place"
+					minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-Я -]+$"
+					data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+				<span class="form__place-error place-cardname-error"></span>
+				<input id="place-url" type="url" name="url" placeholder="Ссылка на картинку" class="form__place" required>
+				<span class="form__place-error place-url-error"></span>
 				<button type="submit" class="form__button">Сохранить</button>
 			</form>
 		</div>
