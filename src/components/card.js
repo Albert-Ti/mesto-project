@@ -1,4 +1,6 @@
-import { openPopup } from "./utils.js";
+import { openPopup, closePopup } from "./utils.js";
+import { popupCard } from "./modal";
+
 const arkhyz = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
 const chelyabinskRegion = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg');
 const ivanovo = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg');
