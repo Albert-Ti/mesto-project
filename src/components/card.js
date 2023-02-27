@@ -1,12 +1,4 @@
-import { openPopup, closePopup } from "./utils.js";
-import { popupCard } from "./modal";
-
-const arkhyz = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
-const chelyabinskRegion = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg');
-const ivanovo = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg');
-const kamchatka = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg');
-const kholmogorskyRayon = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg');
-const baikal = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
+import { openPopup } from "./utils.js";
 
 const cardElements = document.querySelector('.elements');
 const popupImg = document.querySelector('.popup-img');
@@ -15,14 +7,12 @@ const pictureTitle = document.querySelector('.modal__text');
 const cardImageUrl = document.querySelector('[name="url"]');
 const cardImageName = document.querySelector('[name="cardname"]');
 
-// ---Функция отправки формы карточек:---
-function handleCardsFormSubmit(evt) {
-	evt.preventDefault();
-	addCard(cardImageName.value, cardImageUrl.value);
-	closePopup(popupCard);
-	evt.target.reset();
-};
-document.forms["card-form"].addEventListener('submit', handleCardsFormSubmit);
+const arkhyz = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg');
+const chelyabinskRegion = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg');
+const ivanovo = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg');
+const kamchatka = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg');
+const kholmogorskyRayon = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg');
+const baikal = new URL('https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg');
 
 // ---функция добавления карточки:---
 function addCard(titleValue, urlValue) {
