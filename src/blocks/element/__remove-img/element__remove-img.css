@@ -1,12 +1,17 @@
 .element__remove {
+	content: '';
+	width: 18px;
+	height: 20px;
+	background-image: url(../../../image/Trash.svg);
+	background-size: cover;
 	position: absolute;
 	top: 20px;
 	right: 20px;
-	background-color: transparent;
 	border: none;
 	outline: none;
 	cursor: pointer;
 	transition: all 0.1s linear;
+	display: none;
 }
 
 .element__remove:hover {

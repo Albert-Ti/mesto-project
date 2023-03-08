@@ -14,8 +14,10 @@
 	</header>
 	<main class="content">
 		<section class="profile">
-			<img src="<%=require('./image/avatar-Жак-Ив-Кусто.jpg')%>" alt="Тут будет ваша Аватарка"
-				class="profile__avatar">
+			<div class="profile__avatar">
+				<img class="profile__avatar-img" src="<%=require('./image/avatar-Жак-Ив-Кусто.jpg')%>"
+					alt="Тут будет ваша Аватарка">
+			</div>
 			<div class="profile__info">
 				<h1 class="profile__name">Жак-Ив Кусто</h1>
 				<button type="button" class="profile__edit-name-button">
@@ -35,13 +37,13 @@
 	</footer>
 	<template id="template-card">
 		<figure class="element">
-			<img class="element__remove" src="<%=require('./image/Trash.svg')%>" alt="">
+			<div class="element__remove"></div>
 			<img class="element__image" src="" alt="Картинка">
 			<figcaption class="element__item">
 				<h2 class="element__title"></h2>
-				<button type="button" class="element__like">
-				</button>
+				<button type="button" class="element__like"></button>
 			</figcaption>
+			<p class="element__likes"></p>
 		</figure>
 	</template>
 	<div class="popup popup-profile">
@@ -60,6 +62,19 @@
 			</form>
 		</div>
 	</div>
+
+	<div class="popup popup-avatar">
+		<div class="popup__container">
+			<form action="#" method="post" name="avatar-form" class="form" novalidate>
+				<button type="button" class="popup__close"></button>
+				<h3 class="form__title">Обновить аватар</h3>
+				<input id="place-url" type="url" name="avatar" placeholder="Ссылка на аватар" class="form__place" required>
+				<span class="form__place-error place-url-error"></span>
+				<button type="submit" class="form__button">Сохранить</button>
+			</form>
+		</div>
+	</div>
+
 	<div class="popup popup-card">
 		<div class="popup__container">
 			<form action="#" method="post" name="card-form" class="form" novalidate>

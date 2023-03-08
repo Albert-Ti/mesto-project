@@ -1,19 +1,65 @@
 import './pages/index.css';
 
-// ---Функция отправки формы профиля:---
-function handleProfileFormSubmit(evt) {
+import {
+	enableValidation
+} from "./components/validate.js"
+
+import {
+	cardImageName,
+	cardImageUrl
+} from "./components/card.js";
+
+import {
+	closePopup,
+	popups
+} from "./components/utils.js";
+
+import {
+	profileName,
+	profileJob,
+	inputProfileName,
+	inputProfileJob,
+	popupCard,
+	popupProfile,
+	popupAvatar
+} from "./components/modal.js";
+
+import {
+	sendMyCardToServer,
+	changeProfileFromServer,
+	renderLoading,
+	changeAvatarFromServer
+} from "./components/api.js";
+
+// ---Функция отправки формы аватара:---
+const handleAvatarFormSubmit = (evt) => {
 	evt.preventDefault();
+	renderLoading(true);
+	document.querySelector('.profile__avatar-img').src = popupAvatar.querySelector('[name="avatar"]').value;
+	changeAvatarFromServer(popupAvatar.querySelector('[name="avatar"]').value);
+	closePopup(popupAvatar);
+	evt.target.reset();
+};
+document.forms['avatar-form'].addEventListener('submit', handleAvatarFormSubmit);
+
+// ---Функция отправки формы профиля:---
+const handleProfileFormSubmit = (evt) => {
+	evt.preventDefault();
+	renderLoading(true);
 	profileName.textContent = `${inputProfileName.value}`;
 	profileJob.textContent = `${inputProfileJob.value}`;
+	changeProfileFromServer(profileName.textContent, profileJob.textContent);
 	closePopup(popupProfile);
 };
 
 // ---Функция отправки формы карточек:---
-function handleCardsFormSubmit(evt) {
+const handleCardsFormSubmit = (evt) => {
 	evt.preventDefault();
-	addCard(cardImageName.value, cardImageUrl.value);
+	renderLoading(true);
+	sendMyCardToServer(cardImageName.value, cardImageUrl.value);
 	closePopup(popupCard);
 	evt.target.reset();
+	setTimeout(() => location.reload(), 500);
 };
 document.forms["card-form"].addEventListener('submit', handleCardsFormSubmit);
 
@@ -30,42 +76,3 @@ popups.forEach((popup) => {
 	});
 });
 document.forms["profile-form"].addEventListener('submit', handleProfileFormSubmit);
-
-import {
-	enableValidation,
-	toggleButtonState,
-	checkButtons,
-	setEventListeners,
-	isValid,
-	hideErrorPlace,
-	showErrorPlace
-} from "./components/validate.js";
-
-import {
-	createCard,
-	addCard,
-	initialCards,
-	cardElements,
-	popupImg,
-	pictureOpen,
-	pictureTitle,
-	cardImageName,
-	cardImageUrl
-} from "./components/card.js";
-
-import {
-	openPopup,
-	closePopup,
-	popups,
-	handleEscape
-} from "./components/utils.js";
-
-import {
-	profileName,
-	profileJob,
-	inputProfileName,
-	inputProfileJob,
-	popupCard,
-	popupProfile,
-} from "./components/modal.js";
-
