@@ -7,6 +7,8 @@ const inputProfileJob = document.querySelector('[name="about-me"]');
 const popupCard = document.querySelector('.popup-card');
 const popupProfile = document.querySelector('.popup-profile');
 const popupAvatar = document.querySelector('.popup-avatar');
+const avatarImage = document.querySelector('.profile__avatar-img');
+const inputAvatarUrl = document.querySelector('[name="avatar"]');
 
 document.querySelector('.profile__avatar').addEventListener('click', () => openPopup(popupAvatar));
 document.querySelector('.profile__edit-name-button').addEventListener('click', () => openPopup(popupProfile));
@@ -19,5 +21,7 @@ export {
 	inputProfileJob,
 	popupCard,
 	popupProfile,
-	popupAvatar
+	popupAvatar,
+	avatarImage,
+	inputAvatarUrl
 };

@@ -15,13 +15,10 @@ const addCard = (card) => {
 		const myCardElement = createCard(card);
 		myCardElement.querySelector('.element__remove').style.display = 'block';
 		cardElements.append(myCardElement);
-
 	} else {
 		const cardElement = createCard(card);
 		cardElements.append(cardElement);
-	};
-
-
+	}
 };
 
 // ---Клонирование/Изменение карточки:---
@@ -32,7 +29,6 @@ const createCard = (card) => {
 	const elementImage = cloneCard.querySelector('.element__image');
 	const userLikes = cloneCard.querySelector('.element__likes');
 
-	card.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${card.likes.length}`;
 
 	// ---Реализация нажатие на картинку---
 	cloneCard.querySelector('.element__title').textContent = card.name;
@@ -46,24 +42,32 @@ const createCard = (card) => {
 		pictureOpen.setAttribute('alt', `Картинка ${card.name}`);
 		openPopup(popupImg);
 	});
-	card.likes.forEach(obj => {
-		if (obj._id === '209313a7808b04f182624032') {
+
+
+	// ---Лайк добавленных карточек:---
+	likeButton.addEventListener('click', () => {
+		if (!likeButton.classList.contains('element__like_active')) {
+			likeButton.classList.add('element__like_active');
+			userLikes.textContent++;
+			addLikeCard(card._id);
+		} else {
+			likeButton.classList.remove('element__like_active');
+			removeLike(card._id);
+			userLikes.textContent--;
+		}
+	});
+
+	card.likes.forEach(like => {
+		if (like._id === '209313a7808b04f182624032') {
 			likeButton.classList.add('element__like_active');
 		} else {
 			likeButton.classList.remove('element__like_active');
 		}
 	})
 
-	// ---Лайк добавленных карточек:---
-	likeButton.addEventListener('click', () => {
-		if (!likeButton.classList.contains('element__like_active')) {
-			addLikeCard(card._id);
-		} else {
-			removeLike(card._id);
+	card.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${card.likes.length}`;
 
-		}
-		setTimeout(() => location.reload(), 100);
-	});
+
 
 	// ---Удаление добавленных карточек:---
 	cloneCard.querySelector('.element__remove').addEventListener('click', () => {

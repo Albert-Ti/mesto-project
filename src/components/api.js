@@ -1,112 +1,91 @@
-import { addCard } from "./card.js";
-import { profileName, profileJob } from "./modal.js";
-
-
-const headers = {
-	authorization: '1bdbc94b-6239-4b7b-83a9-133ed323b1e4',
-	'Content-Type': 'application/json'
+export const config = {
+	baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
+	headers: {
+		authorization: '1bdbc94b-6239-4b7b-83a9-133ed323b1e4',
+		'Content-Type': 'application/json'
+	},
 };
 
-const handleResponse = (res) => {
+
+export const checkResponse = (res) => {
 	if (res.ok) {
 		return res.json();
 	}
 	return Promise.reject(`Ошибка: ${res.status}`);
 };
 
-const renderLoading = (isLoad) => {
+
+export const request = (url, options) => {
+	return fetch(url, options).then(checkResponse);
+};
+
+
+export const renderLoading = (isLoad, button, buttonText = 'Сохранить', loadButton = 'Сохранение...') => {
 	if (isLoad) {
-		document.querySelectorAll('.form__button').forEach(button => {
-			return button.textContent = 'Сохранение...';
-		})
+		button.textContent = loadButton;
+	} else {
+		button.textContent = buttonText;
 	}
 };
 
-const changeAvatarFromServer = (url) => {
-	fetch('https://nomoreparties.co/v1/plus-cohort-21/users/me/avatar', {
+
+export const editAvatar = (url) => {
+	return request(`${config.baseUrl}/users/me/avatar`, {
 		method: 'PATCH',
-		headers,
+		headers: config.headers,
 		body: JSON.stringify({
 			avatar: url
 		})
 	})
-		.then(handleResponse)
-		.catch(err => console.error(err))
-		.finally(() => renderLoading(false));
+};
 
-}
 
-const changeProfileFromServer = (name, job) => {
-	return fetch('https://nomoreparties.co/v1/plus-cohort-21/users/me', {
+export const editProfile = (name, job) => {
+	return request(`${config.baseUrl}/users/me`, {
 		method: 'PATCH',
-		headers,
+		headers: config.headers,
 		body: JSON.stringify({
 			name: name,
 			about: job
 		})
 	})
-		.then(handleResponse)
-		.then(data => {
-			profileName.textContent = name;
-			profileJob.textContent = job;
-			return data;
-		})
-		.catch(err => console.error(err))
-		.finally(() => renderLoading(false));
+};
 
-}
 
-const removeLike = (cardId) => {
-	return fetch(`https://nomoreparties.co/v1/plus-cohort-21/cards/likes/${cardId}`, {
+export const removeLike = (cardId) => {
+	return request(`${config.baseUrl}/cards/likes/${cardId}`, {
 		method: 'DELETE',
-		headers
+		headers: config.headers,
 	})
-}
+};
 
-const addLikeCard = (cardId) => {
-	return fetch(`https://nomoreparties.co/v1/plus-cohort-21/cards/likes/${cardId}`, {
+
+export const addLikeCard = (cardId) => {
+	return request(`${config.baseUrl}/cards/likes/${cardId}`, {
 		method: 'PUT',
-		headers
+		headers: config.headers,
 	})
 };
 
-const deleteMyCard = (cardId) => {
-	return fetch(`https://nomoreparties.co/v1/plus-cohort-21/cards/${cardId}`, {
+
+export const deleteMyCard = (cardId) => {
+	return request(`${config.baseUrl}/cards/${cardId}`, {
 		method: 'DELETE',
-		headers
+		headers: config.headers,
 	})
 };
 
-const sendMyCardToServer = (nameCard, linkCard) => {
-	fetch('https://nomoreparties.co/v1/plus-cohort-21/cards', {
+
+export const sendMyCard = (nameCard, linkCard) => {
+	return request(`${config.baseUrl}/cards`, {
 		method: 'POST',
-		headers,
+		headers: config.headers,
 		body: JSON.stringify({
 			name: nameCard,
 			link: linkCard
 		})
 	})
-		.then(handleResponse)
-		.then(addCard)
-		.catch(err => console.error(err))
-		.finally(() => renderLoading(false));
 };
 
-const getCardsFromServer = () => fetch('https://nomoreparties.co/v1/plus-cohort-21/cards', { headers });
-getCardsFromServer()
-	.then(handleResponse)
-	.then(data => data.forEach(addCard))
-	.catch(err => console.error(err));
-
-
-
-export {
-	deleteMyCard,
-	getCardsFromServer,
-	changeProfileFromServer,
-	sendMyCardToServer,
-	addLikeCard,
-	removeLike,
-	renderLoading,
-	changeAvatarFromServer
-};
+export const getProfileData = () => request(`${config.baseUrl}/users/me`, { headers: config.headers });
+export const getCardsFromServer = () => request(`${config.baseUrl}/cards`, { headers: config.headers });

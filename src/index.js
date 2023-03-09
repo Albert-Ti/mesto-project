@@ -6,7 +6,8 @@ import {
 
 import {
 	cardImageName,
-	cardImageUrl
+	cardImageUrl,
+	addCard
 } from "./components/card.js";
 
 import {
@@ -21,45 +22,87 @@ import {
 	inputProfileJob,
 	popupCard,
 	popupProfile,
-	popupAvatar
+	popupAvatar,
+	avatarImage,
+	inputAvatarUrl
 } from "./components/modal.js";
 
 import {
-	sendMyCardToServer,
-	changeProfileFromServer,
 	renderLoading,
-	changeAvatarFromServer
+	editProfile,
+	getCardsFromServer,
+	getProfileData,
+	editAvatar,
+	sendMyCard,
+
 } from "./components/api.js";
 
-// ---Функция отправки формы аватара:---
-const handleAvatarFormSubmit = (evt) => {
+
+getProfileData()
+	.then(data => {
+		profileName.textContent = data.name;
+		profileJob.textContent = data.about;
+		avatarImage.src = data.avatar;
+	})
+
+getCardsFromServer()
+	.then(data => data.forEach(addCard))
+
+
+
+export const handleSubmit = (request, evt, loadingText = 'Сохранение...') => {
 	evt.preventDefault();
-	renderLoading(true);
-	document.querySelector('.profile__avatar-img').src = popupAvatar.querySelector('[name="avatar"]').value;
-	changeAvatarFromServer(popupAvatar.querySelector('[name="avatar"]').value);
+	const submitButton = evt.target.querySelector('.form__button');
+	const initialText = submitButton.textContent;
+
+	renderLoading(true, submitButton, initialText, loadingText);
+	request()
+		.then(() => {
+			evt.target.reset()
+		})
+		.catch(err => console.log(`Ошибка: ${err}`))
+		.finally(() => renderLoading(false, submitButton, initialText));
+
+};
+
+// ---Функция отправки формы профиля:---
+export const handleProfileFormSubmit = (evt) => {
+	function makeRequest() {
+		return editProfile(inputProfileName.value, inputProfileJob.value)
+			.then(data => {
+				profileName.textContent = data.name;
+				profileJob.textContent = data.about;
+			});
+	}
+	closePopup(popupProfile);
+	handleSubmit(makeRequest, evt);
+};
+document.forms["profile-form"].addEventListener('submit', handleProfileFormSubmit);
+
+
+// ---Функция отправки формы аватара:---
+export const handleAvatarFormSubmit = (evt) => {
+	function makeRequest() {
+		return editAvatar(inputAvatarUrl.value)
+			.then(data => {
+				avatarImage.src = data.avatar
+			})
+	}
 	closePopup(popupAvatar);
-	evt.target.reset();
+	handleSubmit(makeRequest, evt);
 };
 document.forms['avatar-form'].addEventListener('submit', handleAvatarFormSubmit);
 
-// ---Функция отправки формы профиля:---
-const handleProfileFormSubmit = (evt) => {
-	evt.preventDefault();
-	renderLoading(true);
-	profileName.textContent = `${inputProfileName.value}`;
-	profileJob.textContent = `${inputProfileJob.value}`;
-	changeProfileFromServer(profileName.textContent, profileJob.textContent);
-	closePopup(popupProfile);
-};
+
 
 // ---Функция отправки формы карточек:---
-const handleCardsFormSubmit = (evt) => {
-	evt.preventDefault();
-	renderLoading(true);
-	sendMyCardToServer(cardImageName.value, cardImageUrl.value);
+export const handleCardsFormSubmit = (evt) => {
+	function makeRequest() {
+		return sendMyCard(cardImageName.value, cardImageUrl.value)
+			.then(addCard)
+	}
 	closePopup(popupCard);
-	evt.target.reset();
-	setTimeout(() => location.reload(), 500);
+	handleSubmit(makeRequest, evt);
 };
 document.forms["card-form"].addEventListener('submit', handleCardsFormSubmit);
 
@@ -75,4 +118,4 @@ popups.forEach((popup) => {
 		};
 	});
 });
-document.forms["profile-form"].addEventListener('submit', handleProfileFormSubmit);
+
