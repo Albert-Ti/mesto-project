@@ -70,7 +70,7 @@ export const handleProfileFormSubmit = (evt) => {
 	function makeRequest() {
 		return editProfile(inputProfileName.value, inputProfileJob.value)
 			.then(data => {
-				profilName.textContent = data.name;
+				profileName.textContent = data.name;
 				profileJob.textContent = data.about;
 			})
 			.then(() => closePopup(popupProfile));
