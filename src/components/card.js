@@ -15,6 +15,10 @@ const addCard = (card, userId) => {
 	cardElements.prepend(cardElement);
 };
 
+const addMyCard = (card, userId) => {
+
+}
+
 // ---Клонирование/Изменение карточки:---
 const createCard = (card, userId) => {
 	const templateCard = document.querySelector('#template-card').content;
@@ -22,10 +26,6 @@ const createCard = (card, userId) => {
 	const likeButton = cloneCard.querySelector('.element__like');
 	const elementImage = cloneCard.querySelector('.element__image');
 	const userLikes = cloneCard.querySelector('.element__likes');
-
-	if (card.owner._id === userId) {
-		cloneCard.querySelector('.element__remove').style.display = 'block';
-	};
 
 	// ---Реализация нажатие на картинку---
 	cloneCard.querySelector('.element__title').textContent = card.name;
@@ -40,6 +40,9 @@ const createCard = (card, userId) => {
 		openPopup(popupImg);
 	});
 
+	if (card.owner._id !== userId) {
+		cloneCard.querySelector('.element__remove').style.display = 'none';
+	}
 
 	card.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${card.likes.length}`;
 
@@ -51,7 +54,7 @@ const createCard = (card, userId) => {
 					check.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${check.likes.length}`;
 					likeButton.classList.add('element__like_active')
 				})
-				.catch(err => console.log(`Ошибка: ${err}`))
+				.catch(err => console.log(`Ошибка: ${err}`));
 		} else {
 			removeLike(card._id)
 				.then((check) => {

@@ -43,6 +43,8 @@ Promise.all([getUserInfo(), getCards()])
 	.then(([userData, cards]) => {
 		profileName.textContent = userData.name;
 		profileJob.textContent = userData.about;
+		inputProfileName.value = userData.name;
+		inputProfileJob.value = userData.about;
 		avatarImage.src = userData.avatar;
 		userId = userData._id;
 		cards.forEach(card => addCard(card, userId));
@@ -100,7 +102,7 @@ document.forms['avatar-form'].addEventListener('submit', handleAvatarFormSubmit)
 export const handleCardsFormSubmit = (evt) => {
 	function makeRequest() {
 		return sendMyCard(cardImageName.value, cardImageUrl.value)
-			.then(addCard)
+			.then(card => addCard(card, userId))
 			.then(() => closePopup(popupCard));
 	};
 	handleSubmit(makeRequest, evt);

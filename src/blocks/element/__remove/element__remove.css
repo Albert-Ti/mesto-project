@@ -11,7 +11,7 @@
 	outline: none;
 	cursor: pointer;
 	transition: all 0.1s linear;
-	display: none;
+	display: block;
 }
 
 .element__remove:hover {
