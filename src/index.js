@@ -7,12 +7,13 @@ import {
 import {
 	cardImageName,
 	cardImageUrl,
-	addCard
+	addCard,
 } from "./components/card.js";
 
 import {
 	closePopup,
-	popups
+	popups,
+	renderLoading
 } from "./components/utils.js";
 
 import {
@@ -28,26 +29,25 @@ import {
 } from "./components/modal.js";
 
 import {
-	renderLoading,
 	editProfile,
-	getCardsFromServer,
-	getProfileData,
+	getCards,
+	getUserInfo,
 	editAvatar,
 	sendMyCard,
 
 } from "./components/api.js";
 
+let userId;
 
-getProfileData()
-	.then(data => {
-		profileName.textContent = data.name;
-		profileJob.textContent = data.about;
-		avatarImage.src = data.avatar;
+Promise.all([getUserInfo(), getCards()])
+	.then(([userData, cards]) => {
+		profileName.textContent = userData.name;
+		profileJob.textContent = userData.about;
+		avatarImage.src = userData.avatar;
+		userId = userData._id;
+		cards.forEach(card => addCard(card, userId));
 	})
-
-getCardsFromServer()
-	.then(data => data.forEach(addCard))
-
+	.catch(err => console.log(`Ошибка: ${err}`));
 
 
 export const handleSubmit = (request, evt, loadingText = 'Сохранение...') => {
@@ -70,11 +70,11 @@ export const handleProfileFormSubmit = (evt) => {
 	function makeRequest() {
 		return editProfile(inputProfileName.value, inputProfileJob.value)
 			.then(data => {
-				profileName.textContent = data.name;
+				profilName.textContent = data.name;
 				profileJob.textContent = data.about;
-			});
-	}
-	closePopup(popupProfile);
+			})
+			.then(() => closePopup(popupProfile));
+	};
 	handleSubmit(makeRequest, evt);
 };
 document.forms["profile-form"].addEventListener('submit', handleProfileFormSubmit);
@@ -87,6 +87,7 @@ export const handleAvatarFormSubmit = (evt) => {
 			.then(data => {
 				avatarImage.src = data.avatar
 			})
+			.then(() => closePopup(popupAvatar));
 	}
 	closePopup(popupAvatar);
 	handleSubmit(makeRequest, evt);
@@ -100,8 +101,8 @@ export const handleCardsFormSubmit = (evt) => {
 	function makeRequest() {
 		return sendMyCard(cardImageName.value, cardImageUrl.value)
 			.then(addCard)
-	}
-	closePopup(popupCard);
+			.then(() => closePopup(popupCard));
+	};
 	handleSubmit(makeRequest, evt);
 };
 document.forms["card-form"].addEventListener('submit', handleCardsFormSubmit);

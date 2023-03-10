@@ -20,15 +20,6 @@ export const request = (url, options) => {
 };
 
 
-export const renderLoading = (isLoad, button, buttonText = 'Сохранить', loadButton = 'Сохранение...') => {
-	if (isLoad) {
-		button.textContent = loadButton;
-	} else {
-		button.textContent = buttonText;
-	}
-};
-
-
 export const editAvatar = (url) => {
 	return request(`${config.baseUrl}/users/me/avatar`, {
 		method: 'PATCH',
@@ -87,5 +78,5 @@ export const sendMyCard = (nameCard, linkCard) => {
 	})
 };
 
-export const getProfileData = () => request(`${config.baseUrl}/users/me`, { headers: config.headers });
-export const getCardsFromServer = () => request(`${config.baseUrl}/cards`, { headers: config.headers });
+export const getUserInfo = () => request(`${config.baseUrl}/users/me`, { headers: config.headers });
+export const getCards = () => request(`${config.baseUrl}/cards`, { headers: config.headers });
