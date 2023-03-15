@@ -15,9 +15,6 @@ const addCard = (card, userId) => {
 	cardElements.prepend(cardElement);
 };
 
-const addMyCard = (card, userId) => {
-
-}
 
 // ---Клонирование/Изменение карточки:---
 const createCard = (card, userId) => {
@@ -40,10 +37,7 @@ const createCard = (card, userId) => {
 		openPopup(popupImg);
 	});
 
-	if (card.owner._id !== userId) {
-		cloneCard.querySelector('.element__remove').style.display = 'none';
-	}
-
+	if (card.owner._id !== userId) cloneCard.querySelector('.element__remove').style.display = 'none';
 	card.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${card.likes.length}`;
 
 	// ---Лайк добавленных карточек:---

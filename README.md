@@ -1,3 +1,6 @@
+---
+permalink: /index.html
+---
 # Проект: Mesto.
 
 ## Учебный сайт

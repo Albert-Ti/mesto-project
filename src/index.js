@@ -12,7 +12,6 @@ import {
 
 import {
 	closePopup,
-	popups,
 	renderLoading
 } from "./components/utils.js";
 
@@ -25,7 +24,8 @@ import {
 	popupProfile,
 	popupAvatar,
 	avatarImage,
-	inputAvatarUrl
+	inputAvatarUrl,
+	popups
 } from "./components/modal.js";
 
 import {

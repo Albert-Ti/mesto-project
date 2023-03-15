@@ -1,23 +1,25 @@
-export const popups = document.querySelectorAll('.popup');
+
 // ---Функции открытия/закрытия попап-контента:---
 export function openPopup(popup) {
 	popup.classList.add('popup_opened');
-	document.addEventListener('keydown', handleEscape);
+	document.addEventListener('keyup', handleEscape);
+};
+export function closePopup(popup) {
+	popup.classList.remove('popup_opened');
+	document.removeEventListener('keyup', handleEscape);
 };
 
 // ---закрытие popup клавищей "Escape"---
 export function handleEscape(evt) {
 	if (evt.key === 'Escape') {
-		popups.forEach(closePopup);
+		// const popups = document.querySelectorAll('.popup');
+		// popups.forEach(closePopup);
+		const activePopup = document.querySelector('.popup_opened');
+		closePopup(activePopup);
 	};
 };
 
-export function closePopup(popup) {
-	popup.classList.remove('popup_opened');
-	document.removeEventListener('keydown', handleEscape);
-};
-
-
+// ---изменение текста кнопки во время загрузки сервера---
 export const renderLoading = (isLoad, button, buttonText = 'Сохранить', loadButton = 'Сохранение...') => {
 	if (isLoad) {
 		button.textContent = loadButton;

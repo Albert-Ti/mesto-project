@@ -9,6 +9,7 @@ const popupProfile = document.querySelector('.popup-profile');
 const popupAvatar = document.querySelector('.popup-avatar');
 const avatarImage = document.querySelector('.profile__avatar-img');
 const inputAvatarUrl = document.querySelector('[name="avatar"]');
+const popups = document.querySelectorAll('.popup');
 
 document.querySelector('.profile__avatar').addEventListener('click', () => openPopup(popupAvatar));
 document.querySelector('.profile__edit-name-button').addEventListener('click', () => openPopup(popupProfile));
@@ -23,5 +24,6 @@ export {
 	popupProfile,
 	popupAvatar,
 	avatarImage,
-	inputAvatarUrl
+	inputAvatarUrl,
+	popups
 };

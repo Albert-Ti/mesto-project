@@ -74,11 +74,5 @@ enableValidation({
 });
 
 export {
-	enableValidation,
-	toggleButtonState,
-	checkButtons,
-	setEventListeners,
-	isValid,
-	hideErrorPlace,
-	showErrorPlace
+	enableValidation
 };
