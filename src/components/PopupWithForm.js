@@ -1,5 +1,4 @@
-/************************************************************************/
-// Создайте класс PopupWithForm
+
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
