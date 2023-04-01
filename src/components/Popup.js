@@ -1,4 +1,4 @@
-// Создайте класс Popup
+
 export default class Popup {
   constructor(selector) {
     this._selector = document.querySelector(selector);
