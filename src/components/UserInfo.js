@@ -1,4 +1,3 @@
-import { avatarImage, profileJob, profileName } from "./constants";
 
 export default class UserInfo {
   constructor({ name, about, avatar, getUserInfo, setUserInfo }) {
