@@ -1,5 +1,4 @@
-/************************************************************************/
-// Создание класса Api
+
 
 export default class Api {
   constructor({ baseUrl, headers }) {
