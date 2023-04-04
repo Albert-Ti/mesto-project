@@ -1,113 +1,82 @@
-export const config = {
-	baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
-	headers: {
-		authorization: '1bdbc94b-6239-4b7b-83a9-133ed323b1e4',
-		'Content-Type': 'application/json'
-	},
-};
 
 
-export const checkResponse = (res) => {
-	if (res.ok) {
-		return res.json();
-	}
-	return Promise.reject(`Ошибка: ${res.status}`);
-};
+export default class Api {
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
 
 
-export const request = (url, options) => {
-	return fetch(url, options).then(checkResponse);
-};
+  _checkResponse(res) {
+    if (res.ok) return res.json();
+    return Promise.reject(`Ошибка: ${res.status}`);
+  };
 
 
-export const editAvatar = (url) => {
-	return request(`${config.baseUrl}/users/me/avatar`, {
-		method: 'PATCH',
-		headers: config.headers,
-		body: JSON.stringify({
-			avatar: url
-		})
-	})
-};
+  _request(url, options) {
+    return fetch(url, options).then(this._checkResponse);
+  };
 
 
-export const editProfile = (name, job) => {
-	return request(`${config.baseUrl}/users/me`, {
-		method: 'PATCH',
-		headers: config.headers,
-		body: JSON.stringify({
-			name: name,
-			about: job
-		})
-	})
-};
+  getCards = () => this._request(`${this._baseUrl}/cards`, { headers: this._headers });
+  getUserInfo = () => this._request(`${this._baseUrl}/users/me`, { headers: this._headers });
 
 
-export const removeLike = (cardId) => {
-	return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-		method: 'DELETE',
-		headers: config.headers,
-	})
-};
+  editProfile(name, job) {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: job
+      })
+    })
+  };
 
 
-export const addLikeCard = (cardId) => {
-	return request(`${config.baseUrl}/cards/likes/${cardId}`, {
-		method: 'PUT',
-		headers: config.headers,
-	})
-};
+  editAvatar(url) {
+    return this._request(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: url
+      })
+    })
+  };
 
 
-export const deleteMyCard = (cardId) => {
-	return request(`${config.baseUrl}/cards/${cardId}`, {
-		method: 'DELETE',
-		headers: config.headers,
-	})
-};
+  sendUserCard(nameCard, linkCard) {
+    return this._request(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: nameCard,
+        link: linkCard
+      })
+    })
+  };
 
 
-export const sendMyCard = (nameCard, linkCard) => {
-	return request(`${config.baseUrl}/cards`, {
-		method: 'POST',
-		headers: config.headers,
-		body: JSON.stringify({
-			name: nameCard,
-			link: linkCard
-		})
-	})
-};
+  deleteUserCard(cardId) {
+    return this._request(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+  };
 
-export const getUserInfo = () => request(`${config.baseUrl}/users/me`, { headers: config.headers });
-export const getCards = () => request(`${config.baseUrl}/cards`, { headers: config.headers });
 
-class Api {
-	constructor({ baseUrl, headers }) {
-		this._baseUrl = baseUrl;
-		this._headers = headers;
-	}
+  removeLike(cardId) {
+    return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+  };
 
-	checkResponse(res) {
-		if (res.ok) return res.json();
 
-		return Promise.reject(`Ошибка: ${res.status}`);
-	};
-
-	_request(url, options) {
-		return fetch(url, options).then(checkResponse);
-	};
-
-	getCards() {
-		this._request(`${this._baseUrl}/cards`, { headers: this._headers });
-	};
+  addLike(cardId) {
+    return this._request(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+  };
 }
-
-
-
-
-const api = new Api(config);
-
-
-console.log(api._baseUrl)
-console.log(api._headers)
-console.log(api._request())
