@@ -2,101 +2,103 @@
 <html lang="ru">
 
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Mesto</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto</title>
 </head>
 
 <body class="page">
-	<header class="header">
-		<img src="<%=require('./image/logo-Mesto.svg')%>" class="header__logo" alt="Логотип Место">
-	</header>
-	<main class="content">
-		<section class="profile">
-			<div class="profile__avatar">
-				<img class="profile__avatar-img" src="<%=require('./image/avatar-Жак-Ив-Кусто.jpg')%>"
-					alt="Тут будет ваша Аватарка">
-			</div>
-			<div class="profile__info">
-				<h1 class="profile__name">Жак-Ив Кусто</h1>
-				<button type="button" class="profile__edit-name-button">
-					<img src="<%=require('./image/info-edit-button.svg')%>" alt="Маленький карандаш редактирования">
-				</button>
-				<p class="profile__text">Исследователь океана</p>
-			</div>
-			<button type="button" class="profile__button">
-				<img class="profile__button-img" src="<%=require('./image/Vector.svg')%>" alt="Кнопка крестик">
-			</button>
-		</section>
-		<section class="elements">
-		</section>
-	</main>
-	<footer class="footer">
-		<p class="footer__logo">© 2020 Mesto Russia</p>
-	</footer>
-	<template id="template-card">
-		<figure class="element">
-			<div class="element__remove"></div>
-			<img class="element__image" src="" alt="Картинка">
-			<figcaption class="element__item">
-				<h2 class="element__title"></h2>
-				<button type="button" class="element__like"></button>
-			</figcaption>
-			<p class="element__likes"></p>
-		</figure>
-	</template>
-	<div class="popup popup-profile">
-		<div class="popup__container">
-			<form action="#" method="post" name="profile-form" class="form" novalidate>
-				<button type="button" class="popup__close"></button>
-				<h3 class="form__title">Редактировать профиль</h3>
-				<input id="place-name" type="text" name="username" value="Жак-Ив Кусто" class="form__place" minlength="2"
-					maxlength="40" pattern="^[a-zA-Zа-яА-Я -]+$"
-					data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
-				<span class="form__place-error place-name-error"></span>
-				<input id="place-about" type="text" name="about-me" value="Исследователь океана" class="form__place"
-					minlength="2" maxlength="200" required>
-				<span class="form__place-error place-about-error"></span>
-				<button type="submit" class="form__button">Сохранить</button>
-			</form>
-		</div>
-	</div>
+  <header class="header">
+    <img src="<%=require('./image/logo-Mesto.svg')%>" class="header__logo" alt="Логотип Место">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__avatar">
+        <img class="profile__avatar-img" src="<%=require('./image/avatar-Жак-Ив-Кусто.jpg')%>"
+          alt="Тут будет ваша Аватарка">
+      </div>
+      <div class="profile__info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button type="button" class="profile__edit-name-button">
+          <img src="<%=require('./image/info-edit-button.svg')%>" alt="Маленький карандаш редактирования">
+        </button>
+        <p class="profile__text">Исследователь океана</p>
+      </div>
+      <button type="button" class="profile__button">
+        <img class="profile__button-img" src="<%=require('./image/Vector.svg')%>" alt="Кнопка крестик">
+      </button>
+    </section>
+    <section class="elements">
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__logo">© 2020 Mesto Russia</p>
+  </footer>
 
-	<div class="popup popup-avatar">
-		<div class="popup__container">
-			<form action="#" method="post" name="avatar-form" class="form" novalidate>
-				<button type="button" class="popup__close"></button>
-				<h3 class="form__title">Обновить аватар</h3>
-				<input id="place-url" type="url" name="avatar" placeholder="Ссылка на аватар" class="form__place" required>
-				<span class="form__place-error place-url-error"></span>
-				<button type="submit" class="form__button">Сохранить</button>
-			</form>
-		</div>
-	</div>
+  <template id="template-card">
+    <figure class="element">
+      <div class="element__remove"></div>
+      <img class="element__image" src="" alt="Картинка">
+      <figcaption class="element__item">
+        <h2 class="element__title"></h2>
+        <button type="button" class="element__like"></button>
+      </figcaption>
+      <p class="element__likes"></p>
+    </figure>
+  </template>
 
-	<div class="popup popup-card">
-		<div class="popup__container">
-			<form action="#" method="post" name="card-form" class="form" novalidate>
-				<button type="button" class="popup__close"></button>
-				<h3 class="form__title">Новое место</h3>
-				<input id="place-cardname" type="text" name="cardname" placeholder="Название" class="form__place"
-					minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-Я -]+$"
-					data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
-				<span class="form__place-error place-cardname-error"></span>
-				<input id="place-url" type="url" name="url" placeholder="Ссылка на картинку" class="form__place" required>
-				<span class="form__place-error place-url-error"></span>
-				<button type="submit" class="form__button">Сохранить</button>
-			</form>
-		</div>
-	</div>
-	<div class="popup popup-img">
-		<figure class="modal">
-			<button type="button" class="popup__close"></button>
-			<img class="modal__open-img" src="" alt="картинка">
-			<figcaption class="modal__text"></figcaption>
-		</figure>
-	</div>
+  <div class="popup popup-profile">
+    <div class="popup__container">
+      <form action="#" method="post" name="profile-form" class="form" novalidate>
+        <button type="button" class="popup__close"></button>
+        <h3 class="form__title">Редактировать профиль</h3>
+        <input id="place-name" type="text" name="username" value="Жак-Ив Кусто" class="form__place" minlength="2"
+          maxlength="40" pattern="^[a-zA-Zа-яА-Я -]+$"
+          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+        <span class="form__place-error place-name-error"></span>
+        <input id="place-about" type="text" name="about-me" value="Исследователь океана" class="form__place"
+          minlength="2" maxlength="200" required>
+        <span class="form__place-error place-about-error"></span>
+        <button type="submit" class="form__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup-avatar">
+    <div class="popup__container">
+      <form action="#" method="post" name="avatar-form" class="form" novalidate>
+        <button type="button" class="popup__close"></button>
+        <h3 class="form__title">Обновить аватар</h3>
+        <input id="place-url" type="url" name="avatar" placeholder="Ссылка на аватар" class="form__place" required>
+        <span class="form__place-error place-url-error"></span>
+        <button type="submit" class="form__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup-card">
+    <div class="popup__container">
+      <form action="#" method="post" name="card-form" class="form" novalidate>
+        <button type="button" class="popup__close"></button>
+        <h3 class="form__title">Новое место</h3>
+        <input id="place-cardname" type="text" name="cardname" placeholder="Название" class="form__place" minlength="2"
+          maxlength="30" pattern="^[a-zA-Zа-яА-Я -]+$"
+          data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" required>
+        <span class="form__place-error place-cardname-error"></span>
+        <input id="place-url" type="url" name="url" placeholder="Ссылка на картинку" class="form__place" required>
+        <span class="form__place-error place-url-error"></span>
+        <button type="submit" class="form__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup-img">
+    <figure class="modal">
+      <button type="button" class="popup__close"></button>
+      <img class="modal__open-img" src="" alt="картинка">
+      <figcaption class="modal__text"></figcaption>
+    </figure>
+  </div>
 </body>
 
 </html>
