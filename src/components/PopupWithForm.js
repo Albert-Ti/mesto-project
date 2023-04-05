@@ -1,6 +1,4 @@
-
 import Popup from "./Popup.js";
-
 export default class PopupWithForm extends Popup {
   constructor({ selector, submitForm }) {
     super(selector);
@@ -23,6 +21,7 @@ export default class PopupWithForm extends Popup {
 
     this._selector.addEventListener('submit', (evt) => {
       this.submitForm(this._getInputValues(), evt);
+      this._selector.querySelector('.form__button').textContent = 'Сохранение...'
     })
 
     if (this._selector.classList.contains('popup-card')) {

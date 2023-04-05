@@ -1,4 +1,4 @@
-import './pages/index.css';
+import './index.css';
 
 import {
   profileName,
@@ -6,17 +6,18 @@ import {
   inputProfileName,
   inputProfileJob,
   avatarImage,
+  submitBtn,
   config
-} from './components/constants.js'
+} from '../utils/constants.js'
 
-import Api from './components/api.js';
-import Section from './components/Section.js';
-import Card from './components/card.js';
-import Popup from './components/Popup.js';
-import PopupWithImage from './components/PopupWithImage.js';
-import PopupWithForm from './components/PopupWithForm.js';
-import UserInfo from './components/UserInfo.js';
-import { formValidator } from './components/FormValidator.js';
+import Api from '../components/Api.js';
+import Section from '../components/Section.js';
+import Card from '../components/Card.js';
+import Popup from '../components/Popup.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import { formValidator } from '../components/FormValidator.js';
 
 formValidator.enableValidation();
 
@@ -48,6 +49,8 @@ Promise.all([api.getUserInfo(), api.getCards()])
           selector: '.popup-avatar',
           submitForm({ avatar }, evt) {
             evt.preventDefault();
+
+
             api.editAvatar(avatar)
               .then(data => {
                 avatarImage.src = data.avatar;
@@ -55,6 +58,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
               .then(() => popupAvatar.close())
               .then(() => evt.target.reset())
               .catch(err => console.log(`Ошибка: ${err}`))
+              .finally(() => document.forms['avatar-form'].button.textContent = 'Сохранить');
           }
         });
         popupAvatar.setEventListeners();
@@ -99,6 +103,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
       selector: '.popup-card',
       submitForm({ cardname, url }, evt) {
         evt.preventDefault();
+
         api.sendUserCard(cardname, url)
           .then(data => {
             const userCard = new Card({
@@ -118,6 +123,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
           .then(() => popupForm.close())
           .then(() => evt.target.reset())
           .catch(err => console.log(`Ошибка: ${err}`))
+          .finally(() => document.forms['card-form'].button.textContent = 'Сохранить');
       }
     });
     popupForm.setEventListeners();
@@ -130,13 +136,14 @@ Promise.all([api.getUserInfo(), api.getCards()])
         evt.preventDefault();
 
         api.editProfile(username, job)
-          .then(data => {
-            const profileUser = new UserInfo(data)
-            profileUser.getUserInfo();
+          .then(({ name, about }) => {
+            profileName.textContent = name;
+            profileJob.textContent = about;
           })
           .then(() => popupProfile.close())
           .then(() => evt.target.reset())
           .catch(err => console.log(`Ошибка: ${err}`))
+          .finally(() => document.forms['profile-form'].button.textContent = 'Сохранить');
       }
     });
     popupProfile.setEventListeners();

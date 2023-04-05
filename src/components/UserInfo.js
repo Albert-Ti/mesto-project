@@ -1,4 +1,3 @@
-
 export default class UserInfo {
   constructor({ name, about, avatar, getUserInfo, setUserInfo }) {
     this.name = name;
