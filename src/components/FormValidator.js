@@ -1,6 +1,6 @@
-class FormValidator {
+export default class FormValidator {
   constructor(data) {
-    this._formSelector = data.formSelector;
+    this._formSelector = document.querySelectorAll(data.formSelector);
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
@@ -73,18 +73,10 @@ class FormValidator {
 
 
   enableValidation() {
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
-    formList.forEach((formElem) => {
+    this._formSelector.forEach((formElem) => {
       this._setEventListeners(formElem);
     });
   };
 };
 
-export const formValidator = new FormValidator({
-  formSelector: '.form',
-  inputSelector: '.form__place',
-  submitButtonSelector: '.form__button',
-  inactiveButtonClass: 'form__button_inactive',
-  errorClass: 'form__place_active-error'
-});
 

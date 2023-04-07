@@ -7,7 +7,6 @@ export const popupAvatar = document.querySelector('.popup-avatar');
 export const avatarImage = document.querySelector('.profile__avatar-img');
 export const inputAvatarUrl = document.querySelector('[name="avatar"]');
 export const popups = document.querySelectorAll('.popup');
-
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
   headers: {

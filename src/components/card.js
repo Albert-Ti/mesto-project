@@ -1,11 +1,13 @@
 
 export default class Card {
-  constructor({ api, item, userId, handleCardClick }, selector) {
+  constructor({ api, item, userId, handleCardClick, }, selector) {
     this._api = api;
     this._card = item;
     this._userId = userId;
     this._handleCardClick = handleCardClick;
     this._selector = selector;
+    this._element = this._getElement();
+    this._removeBtn = this._element.querySelector('.element__remove');
   };
 
 
@@ -21,29 +23,28 @@ export default class Card {
 
 
   generateCard() {
-    this._element = this._getElement();
-    this._handleCardClick();
     this._setEventListeners();
 
-    const imageCard = this._element.querySelector('.element__image');
+    this._imageCard = this._element.querySelector('.element__image');
+    this._imageCard.addEventListener('click', () => this._handleCardClick())
 
-    imageCard.src = this._card.link;
-    imageCard.alt = `Картинка ${this._card.name}`;
+    this._imageCard.src = this._card.link;
+    this._imageCard.alt = `Картинка ${this._card.name}`;
     this._element.querySelector('.element__title').textContent = this._card.name;
 
     // ---убираем иконку удаление у карточек---
-    if (this._card.owner._id !== this._userId) this._element.querySelector('.element__remove').style.display = 'none';
+    if (this._card.owner._id !== this._userId) this._removeBtn.style.display = 'none';
 
     return this._element;
   };
 
 
   _setEventListeners() {
-    const likeButton = this._element.querySelector('.element__like');
-    const userLikes = this._element.querySelector('.element__likes');
+    this._likeButton = this._element.querySelector('.element__like');
+    this._userLikes = this._element.querySelector('.element__likes');
 
     // ---Удаление добавленных карточек:---
-    this._element.querySelector('.element__remove').addEventListener('click', () => {
+    this._removeBtn.addEventListener('click', () => {
       this._api.
         deleteUserCard(this._card._id)
         .then(() => this._element.closest('.element').remove())
@@ -51,33 +52,33 @@ export default class Card {
     });
 
     // ---Лайк добавленных карточек:---
-    likeButton.addEventListener('click', () => {
-      if (!likeButton.classList.contains('element__like_active')) {
+    this._likeButton.addEventListener('click', () => {
+      if (!this._likeButton.classList.contains('element__like_active')) {
         this._api.addLike(this._card._id)
           .then((check) => {
-            check.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${check.likes.length}`;
-            likeButton.classList.add('element__like_active')
+            check.likes.length === 0 ? this._userLikes.textContent = '' : this._userLikes.textContent = `${check.likes.length}`;
+            this._likeButton.classList.add('element__like_active')
           })
           .catch(err => console.log(`Ошибка: ${err}`));
       } else {
         this._api.removeLike(this._card._id)
           .then((check) => {
-            check.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = `${check.likes.length}`;
-            likeButton.classList.remove('element__like_active')
+            check.likes.length === 0 ? this._userLikes.textContent = '' : this._userLikes.textContent = `${check.likes.length}`;
+            this._likeButton.classList.remove('element__like_active')
           })
           .catch(err => console.log(`Ошибка: ${err}`));
       };
     });
 
     // ---отображение колл-во лайков---
-    this._card.likes.length === 0 ? userLikes.textContent = '' : userLikes.textContent = this._card.likes.length;
+    this._card.likes.length === 0 ? this._userLikes.textContent = '' : this._userLikes.textContent = this._card.likes.length;
 
     // ---отображение иконки лайка пользователя---
     this._card.likes.forEach(like => {
       if (like._id === this._userId) {
-        likeButton.classList.add('element__like_active');
+        this._likeButton.classList.add('element__like_active');
       } else {
-        likeButton.classList.remove('element__like_active');
+        this._likeButton.classList.remove('element__like_active');
       }
     });
   }
