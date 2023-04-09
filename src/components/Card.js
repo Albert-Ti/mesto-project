@@ -1,9 +1,9 @@
 
 export default class Card {
-  constructor({ api, item, userId, handleCardClick, }, selector) {
+  constructor({ api, item, userData, handleCardClick, }, selector) {
     this._api = api;
     this._card = item;
-    this._userId = userId;
+    this._userId = userData._id;
     this._handleCardClick = handleCardClick;
     this._selector = selector;
     this._element = this._getElement();

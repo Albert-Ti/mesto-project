@@ -1,81 +1,87 @@
 export default class FormValidator {
-  constructor(data) {
-    this._formSelector = document.querySelectorAll(data.formSelector);
+  constructor(formElem, data) {
+    this._formSelector = formElem;
     this._inputSelector = data.inputSelector;
     this._submitButtonSelector = data.submitButtonSelector;
     this._inactiveButtonClass = data.inactiveButtonClass;
     this._errorClass = data.errorClass;
+
+    this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
+    this._buttonList = this._formSelector.querySelector(this._submitButtonSelector);
   };
 
 
-  _showErrorPlace(formElem, inputElem, errorMessage) {
-    const errorElem = formElem.querySelector(`.${inputElem.id}-error`);
-    inputElem.classList.add(this._errorClass);
-    errorElem.textContent = errorMessage;
+  _showErrorPlace(input, errorMessage) {
+    this._errorElem = this._formSelector.querySelector(`.${input.id}-error`);
+    input.classList.add(this._errorClass);
+    this._errorElem.textContent = errorMessage;
   };
-  _hideErrorPlace(formElem, inputElem) {
-    const errorElem = formElem.querySelector(`.${inputElem.id}-error`);
-    inputElem.classList.remove(this._errorClass);
-    errorElem.textContent = '';
+  _hideErrorPlace(input) {
+    this._errorElem = this._formSelector.querySelector(`.${input.id}-error`);
+    input.classList.remove(this._errorClass);
+    this._errorElem.textContent = '';
   };
 
 
-  _isValid(formElem, inputElem) {
-    if (inputElem.validity.patternMismatch) {
-      inputElem.setCustomValidity(inputElem.dataset.errorMessage);
+  _isValid(input) {
+    if (input.validity.patternMismatch) {
+      input.setCustomValidity(input.dataset.errorMessage);
     } else {
-      inputElem.setCustomValidity('');
+      input.setCustomValidity('');
     }
-    if (!inputElem.validity.valid) {
-      this._showErrorPlace(formElem, inputElem, inputElem.validationMessage);
+    if (!input.validity.valid) {
+      this._showErrorPlace(input, input.validationMessage);
     } else {
-      this._hideErrorPlace(formElem, inputElem);
+      this._hideErrorPlace(input);
     };
   };
 
 
-  _setEventListeners(formElem) {
-    const inputList = Array.from(formElem.querySelectorAll(this._inputSelector));
-    const buttonList = formElem.querySelector(this._submitButtonSelector);
-    this._toggleButtonState(inputList, buttonList);
+  _setEventListeners() {
+    this._inputList.forEach((input) => {
+      input.addEventListener('input', () => {
 
-    inputList.forEach((inputElem) => {
-      inputElem.addEventListener('input', () => {
-        this._isValid(formElem, inputElem);
-        this._toggleButtonState(inputList, buttonList);
+        this._isValid(input);
+        this._toggleButtonState();
       });
     });
 
-    formElem.addEventListener('reset', () => {
+    this._formSelector.addEventListener('reset', () => {
       setTimeout(() => {
-        this._toggleButtonState(inputList, buttonList);
+        this._toggleButtonState();
       }, 0);
     });
   };
 
 
-  _checkButtons(inputList) {
-    return inputList.some((elem) => {
+  _checkButtons() {
+    return this._inputList.some((elem) => {
       return !elem.validity.valid;
     });
   };
 
+  resetValidation() {
+    this._toggleButtonState();
 
-  _toggleButtonState(inputList, buttonElem) {
-    if (this._checkButtons(inputList)) {
-      buttonElem.classList.add(this._inactiveButtonClass);
-      buttonElem.setAttribute('disabled', true);
+    this._inputList.forEach((input) => {
+      this._hideErrorPlace(input);
+    })
+  }
+
+
+  _toggleButtonState() {
+    if (this._checkButtons()) {
+      this._buttonList.classList.add(this._inactiveButtonClass);
+      this._buttonList.setAttribute('disabled', true);
     } else {
-      buttonElem.classList.remove(this._inactiveButtonClass);
-      buttonElem.removeAttribute('disabled');
+      this._buttonList.classList.remove(this._inactiveButtonClass);
+      this._buttonList.removeAttribute('disabled');
     };
   };
 
 
   enableValidation() {
-    this._formSelector.forEach((formElem) => {
-      this._setEventListeners(formElem);
-    });
+    this._setEventListeners();
   };
 };
 
