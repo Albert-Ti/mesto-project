@@ -1,9 +1,3 @@
-const profileName = document.querySelector('.profile__name');
-const profileJob = document.querySelector('.profile__text');
-const inputProfileName = document.querySelector('[name="name"]');
-const inputProfileJob = document.querySelector('[name="about"]');
-const avatarImage = document.querySelector('.profile__avatar-img');
-
 export const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-21',
   headers: {
@@ -21,10 +15,9 @@ export const dataSelectors = {
   errorClass: 'form__place_active-error'
 }
 
+
 export const formData = {
-  profileName,
-  profileJob,
-  inputProfileName,
-  inputProfileJob,
-  avatarImage,
+  nameSelector: '.profile__name',
+  aboutSelector: '.profile__text',
+  avatarSelector: '.profile__avatar-img'
 }

@@ -1,33 +1,30 @@
 export default class UserInfo {
-  constructor(formData) {
+  constructor({ nameSelector, aboutSelector, avatarSelector }) {
 
-    this._profileName = formData.profileName;
-    this._profileJob = formData.profileJob;
-    this._inputProfileName = formData.inputProfileName;
-    this._inputProfileJob = formData.inputProfileJob;
-    this._avatarImage = formData.avatarImage;
+    this._name = document.querySelector(nameSelector);
+    this._about = document.querySelector(aboutSelector);
+    this._avatar = document.querySelector(avatarSelector);
   };
 
 
   getUserInfo() {
-    return JSON.parse(localStorage.getItem(('profile')))
+    return {
+      name: this._name.textContent,
+      about: this._about.textContent
+    }
   };
 
 
-  setUserInfo(data) {
-    this._profileName.textContent = data.name;
-    this._profileJob.textContent = data.about;
-    this._avatarImage.src = data.avatar;
+  setUserInfo(userData) {
+    this._name.textContent = userData.name;
+    this._about.textContent = userData.about;
+    this._avatar.src = userData.avatar;
   };
 
   generate() {
     this._user = this.getUserInfo();
 
-    this._profileName.textContent = this._user.name;
-    this._profileJob.textContent = this._user.about;
-    this._avatarImage.src = this._user.avatar;
-
-    this._inputProfileName.value = this._user.name;
-    this._inputProfileJob.value = this._user.about;
+    this._name.textContent = this._user.name;
+    this._about.textContent = this._user.about;
   }
 }

@@ -4,7 +4,6 @@ import {
   config,
   dataSelectors
 } from '../utils/constants.js'
-
 import Api from '../components/Api.js';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -12,6 +11,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
 import FormValidator from '../components/FormValidator.js';
+
+
 
 const formValidator = {};
 const enableValidation = (data) => {
@@ -33,10 +34,12 @@ const api = new Api(config);
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
+    // localStorage.setItem('profile', JSON.stringify(userData))
 
     const userInfo = new UserInfo(formData)
-    localStorage.setItem('profile', JSON.stringify(userData))
+    userInfo.setUserInfo(userData);
     userInfo.generate();
+
 
 
     const defaultCards = new Section({
@@ -56,7 +59,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
         api.editAvatar(avatar)
           .then(data => {
             userInfo.setUserInfo(data);
-
             popupAvatar.close();
           })
           .catch(err => console.log(`Ошибка: ${err}`))
@@ -67,7 +69,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
 
     document.querySelector('.profile__avatar').addEventListener('click', () => {
       popupAvatar.open();
-      formValidator['profile-form'].resetValidation();
+      formValidator['avatar-form'].resetValidation();
     });
 
 
@@ -78,7 +80,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
 
         api.editProfile(name, about)
           .then((data) => {
-            popupProfile.setInputValues(data);
             userInfo.setUserInfo(data);
             popupProfile.close();
           })
@@ -90,7 +91,8 @@ Promise.all([api.getUserInfo(), api.getCards()])
 
     document.querySelector('.profile__edit-name-button').addEventListener('click', () => {
       popupProfile.open();
-      formValidator['avatar-form'].resetValidation();
+      popupProfile.setInputValues(userInfo.getUserInfo());
+      formValidator['profile-form'].resetValidation();
     });
 
 
@@ -117,21 +119,21 @@ Promise.all([api.getUserInfo(), api.getCards()])
       formValidator['card-form'].resetValidation();
     });
 
+    const popupImage = new PopupWithImage('.popup-img');
+    popupImage.setEventListeners();
 
 
     function createCard(item) {
-      const card = new Card({
+      const userCard = new Card({
         api,
         item,
         userData,
         handleCardClick() {
-          const popupImage = new PopupWithImage('.popup-img');
           popupImage.open(item);
-          popupImage.setEventListeners();
         }
       }, '#template-card')
-      const cardElem = card.generateCard();
 
+      const cardElem = userCard.generateCard();
       return cardElem;
     };
 
