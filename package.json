@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Learning platform",
   "main": "src/pages/index.js",
+  "homepage": "https://github.com/Albert-Ti/mesto-project",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
@@ -19,7 +20,6 @@
   "bugs": {
     "url": "https://github.com/Albert-Ti/mesto-project/issues"
   },
-  "homepage": "https://github.com/Albert-Ti/mesto-project#readme",
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
